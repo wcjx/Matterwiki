@@ -13,6 +13,7 @@ import Admin from './components/admin.jsx';
 import Setup from './components/setup.jsx';
 import EditTopic from './components/edit_topics.jsx';
 import EditUser from './components/edit_users.jsx';
+import Topics from './components/topics.jsx'
 
 
 export default function () {
@@ -26,6 +27,7 @@ export default function () {
 		  <Route path="article/history/:articleId" component={ArticleHistory}/>
 		  <Route path="article/:articleId" component={Article}/>
 		  <Route path="admin" component={Admin}/>
+		  <Route path="topics" component={Topics}/>
 		  <Route path="topic/edit/:topicId" component={EditTopic}/>
 		  <Route path="user/edit/:userId" component={EditUser}/>
 			<Route path="search" component={Search}/>

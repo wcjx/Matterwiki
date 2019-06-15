@@ -53,7 +53,9 @@ class App extends React.Component {
                 <li><Link to="admin" className="">Admin
                   </Link>
                 </li> :
-                ''
+                <li><Link to="topics" className="">Topics
+                </Link>
+              </li>
               }
              <li><Link to="article/new" className="">New Article
               </Link>
