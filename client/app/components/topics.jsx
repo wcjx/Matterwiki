@@ -9,7 +9,6 @@ class Topics extends React.Component {
   constructor(props) {
     super(props);
     this.addTopic = this.addTopic.bind(this);
-    this.deleteTopic = this.deleteTopic.bind(this);
     this.state = {loading_topics: true,  topics: [], error: ""}
   }
 
@@ -31,18 +30,6 @@ class Topics extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({topics: response.data, loading_topics: false})
-      }
-    });
-
-    fetch('/api/users',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({users: response.data, loading_users: false})
       }
     });
 
@@ -83,37 +70,6 @@ class Topics extends React.Component {
     });
   }
 
-  deleteTopic(id,e) {
-    e.preventDefault();
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'DELETE',
-               headers: myHeaders,
-               body: "id="+id
-               };
-    var that = this;
-    fetch('/api/topics/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        topics = that.state.topics
-        var topics = $.grep(topics, function(e){
-           return e.id != id;
-        });
-        that.setState({topics: topics});
-        Alert.success('Topic has been deleted');
-      }
-    });
-  }
-
-
-
   render () {
     if(this.state.loading_topics)
       return <Loader />
@@ -130,7 +86,6 @@ class Topics extends React.Component {
                     <div key={topic.id} href="#" className="list-group-item">
                       {(topic.id !== 1)? <span className="pull-right">
                       <Link to={'topic/edit/'+topic.id} className="btn btn-default">Edit</Link>
-                      <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
                       </span>: ''}
                       <h4 className="list-group-item-heading">{topic.name}</h4>
                       <p className="list-group-item-text">{topic.description}</p>
@@ -140,46 +95,7 @@ class Topics extends React.Component {
           
           
           </div>
-          <div className="modal modal-fullscreen fade" id="addUser" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div className="modal-body">
-                  <center>
-                  <div className="row">
-
-                    <div className="col-md-6 col-sd-12">
-                      <h1><b>Add User</b></h1>
-                      <br/>
-                        <form>
-                          <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" />
-                          </div>
-                          <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" />
-                          </div>
-                      <div className="col-sm-12 form-group">
-                        <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder="Email" />
-                      </div>
-                      <div className="col-sm-12 form-group">
-                        <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder="Password" />
-                      </div>
-                      <div className="col-sm-12 form-group">
-                        <button onClick={this.addUser} className="btn btn-default btn-block btn-lg">Add User</button>
-                      </div>
-                    </form>
-                    </div>
-                  </div>
-                </center>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-
+          
           <div className="modal modal-fullscreen fade" id="addTopic" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
