@@ -3,7 +3,16 @@ import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 import BraftEditor from 'braft-editor';
-
+import Markdown from 'braft-extensions/dist/markdown'
+import Table from 'braft-extensions/dist/table'
+BraftEditor.use(Markdown())
+BraftEditor.use(Table())
+const hooks = {
+    'toggle-link': ({ href, target }) => {
+        target='_blank'
+        return { href, target }
+    }
+}
 class NewArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +50,7 @@ class NewArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let body =this.state.editor.toHTML();
+    let body =this.state.editor.toRAW();
     // var body = this.refs.body.value;
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
@@ -91,7 +100,8 @@ class NewArticle extends React.Component {
          <br/>
          <div className="row">
           <div className="col-md-12 new-article-form">
-            <BraftEditor value={this.state.editor} onChange={this.handleChange}
+            <BraftEditor value={this.state.editor} onChange={this.handleChange} hooks={hooks}
+            placeholder={'Write here...'}
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
             <input id="my_input" type="hidden" value="" ref="body" onChange={this.handleChange}/>

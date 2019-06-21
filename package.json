@@ -32,6 +32,7 @@
     "body-parser": "1.15.2",
     "bookshelf": "0.10.0",
     "braft-editor": "^2.3.7",
+    "braft-extensions": "0.0.18",
     "express": "4.14.0",
     "jsonwebtoken": "7.1.9",
     "knex": "0.11.10",

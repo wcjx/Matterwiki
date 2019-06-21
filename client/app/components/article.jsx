@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import BraftEditor from 'braft-editor';
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -85,9 +86,7 @@ class ViewArticle extends React.Component {
                   Last updated on {new Date(this.state.article.updated_at.replace(' ','T')).toDateString()}
               </div>
             </div>
-            <div className="single-article-body"
-              dangerouslySetInnerHTML={this.getRawMarkupBody()}>
-            </div>
+            <BraftEditor controlBarStyle={{display:"none"}} value={ BraftEditor.createEditorState(this.state.article.body)} readOnly={true}/>
           </div>
           <div className="col-md-3 article-sidebar">
             <div className="sidebar-block">

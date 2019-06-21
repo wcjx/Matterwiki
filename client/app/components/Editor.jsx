@@ -3,7 +3,12 @@ import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import BraftEditor from 'braft-editor';
-
+const hooks = {
+    'toggle-link': ({ href, target }) => {
+        target='_blank'
+        return { href, target }
+    }
+}
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +23,7 @@ class EditArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let body =this.state.editor.toHTML();
+    let body =this.state.editor.toRAW();
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
@@ -68,7 +73,6 @@ class EditArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-          console.log(response.data.body)
         that.setState({editor: BraftEditor.createEditorState(response.data.body), title: response.data.title, topic_id: response.data.topic_id})
       }
       that.setState({loading: false});
@@ -113,7 +117,7 @@ class EditArticle extends React.Component {
            <br/>
            <div className="row">
             <div className="col-md-12 new-article-form">
-            <BraftEditor value={this.state.editor} onChange={this.handleChange}
+            <BraftEditor value={this.state.editor} onChange={this.handleChange} hooks={hooks}
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
           <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
