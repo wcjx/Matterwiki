@@ -91,9 +91,8 @@ class NewArticle extends React.Component {
          <br/>
          <div className="row">
           <div className="col-md-12 new-article-form">
-                {/* <trix-toolbar id="my_toolbar"></trix-toolbar> */}
-            {/* <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor> */}
             <BraftEditor value={this.state.editor} onChange={this.handleChange}
+            contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
             <input id="my_input" type="hidden" value="" ref="body" onChange={this.handleChange}/>
                <br/>
