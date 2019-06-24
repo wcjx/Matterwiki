@@ -101,7 +101,7 @@ class NewArticle extends React.Component {
          <div className="row">
           <div className="col-md-12 new-article-form">
             <BraftEditor value={this.state.editor} onChange={this.handleChange} hooks={hooks}
-            placeholder={'Write here...'}
+            placeholder={'Write here...'} language='en'
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
             <input id="my_input" type="hidden" value="" ref="body" onChange={this.handleChange}/>
