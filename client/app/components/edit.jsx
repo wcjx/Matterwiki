@@ -14,7 +14,7 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true, editor:null};
+    this.state = {title: "", topic_id: "", topics: [], loading: true, editor:null};
   }
 
   handleChange(newState) {
@@ -120,7 +120,6 @@ class EditArticle extends React.Component {
             <BraftEditor value={this.state.editor} onChange={this.handleChange} hooks={hooks} language='en'
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
-          <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
                  <br/>
                  <label>Choose topic</label>
                  <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>
