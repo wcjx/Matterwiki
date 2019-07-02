@@ -60,6 +60,9 @@ class App extends React.Component {
              <li><Link to="article/new" className="">New Article
               </Link>
             </li>
+            <li><Link to="password" className="">Settings
+              </Link>
+            </li>
             <li>
               <a href="" onClick={this.handleLogout} >Logout</a>
             </li>

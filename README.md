@@ -3,6 +3,7 @@ Note: This is forked from [Matterwiki](https://github.com/Matterwiki/Matterwiki)
 Differences:
 1. Replace the text editor with [braft-editor](https://github.com/margox/braft-editor).
 2. Give all users permission to create and edit topics.
+3. All users can change their password.
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
 ## :warning: Warning
