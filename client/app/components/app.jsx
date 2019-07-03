@@ -60,7 +60,7 @@ class App extends React.Component {
              <li><Link to="article/new" className="">New Article
               </Link>
             </li>
-            <li><Link to="password" className="">Settings
+            <li><Link to="settings" className="">Settings
               </Link>
             </li>
             <li>

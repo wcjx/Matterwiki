@@ -14,7 +14,7 @@ import Setup from './components/setup.jsx';
 import EditTopic from './components/edit_topics.jsx';
 import EditUser from './components/edit_users.jsx';
 import Topics from './components/topics.jsx'
-import ChangePassword from './components/change_password.jsx'
+import Settings from './components/settings.jsx'
 
 export default function () {
 	return (
@@ -32,7 +32,7 @@ export default function () {
 		  <Route path="user/edit/:userId" component={EditUser}/>
 			<Route path="search" component={Search}/>
 		  <Route path="setup" component={Setup}/>
-		  <Route path="password" component={ChangePassword}/>
+		  <Route path="settings" component={Settings}/>
 		</Route>
 	);
 };
