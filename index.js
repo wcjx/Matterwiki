@@ -29,9 +29,8 @@ if(process.env.NODE_ENV !== 'production') {
 app.set('superSecret', config.auth_secret); // secret variable
 
 // Using the body parser middleware to parse request body
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.get('/api',function(req,res){
   // this is just a sample endpoint I build to see if things are working
