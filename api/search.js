@@ -24,6 +24,7 @@ module.exports = function(app) {
     SearchQuery = "%"+SearchQuery+"%";
     Articles.query(function(qb) {
             qb.where('title', 'LIKE', SearchQuery).orWhere('body','LIKE',SearchQuery);
+            qb.column('id', 'title', 'updated_at');            
         }).fetchAll()
         .then(function (collection) {
             res.json({

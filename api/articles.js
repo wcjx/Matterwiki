@@ -68,6 +68,7 @@ module.exports =  function(app){
         if(req.query.count)
           qb.limit(req.query.count);
         qb.orderBy('updated_at','DESC');
+        qb.column('id', 'title', 'updated_at');
     })
     .fetchAll()
       .then(function (collection) {

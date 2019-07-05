@@ -87,17 +87,24 @@ module.exports = function(app) {
     */
     Topics.where({id: req.params.id}).fetch({withRelated: [{'articles': function(qb) {
             if(req.query.count)
-                qb.limit(req.query.count);
+            qb.limit(req.query.count);
              qb.orderBy("updated_at","DESC");
-         }}]}).then(function(topic) {
-      res.status(200).json({
-        error: {
-          error: false,
-          message: ''
-        },
-        code: 'B129',
-        data: topic.related('articles')
-      });
+             qb.column('id', 'title', 'updated_at');
+         }}],
+        }).then(function(topic) {
+          topic.related('articles').fetch({columns: ['id', 'title', 'updated_at']}).then(
+            function(articles){
+              res.status(200).json({
+                error: {
+                  error: false,
+                  message: ''
+                },
+                code: 'B129',
+                data: articles
+              });
+
+            }
+          )
     })
     .catch(function(error){
       res.status(500).json({
