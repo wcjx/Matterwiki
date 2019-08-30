@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import BraftEditor from 'braft-editor';
 
 class SimpleArticle extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class SimpleArticle extends React.Component {
   }
 
   getRawMarkupBody() {
-    return { __html: this.state.article.body };
+    return BraftEditor.createEditorState(this.state.article.body);
   }
 
 
@@ -47,9 +48,7 @@ class SimpleArticle extends React.Component {
                   Edited by <b>{this.state.article.user.name}</b>
               </div>
             </div>
-            <div className="single-article-body"
-              dangerouslySetInnerHTML={this.getRawMarkupBody()}>
-            </div>
+            <BraftEditor controlBarStyle={{display:"none"}} value={ this.getRawMarkupBody()} readOnly={true}/>
           </div>
           </div>
             );
