@@ -5,6 +5,8 @@ Differences:
 2. Give all users permission to create and edit topics.
 3. All users can change their password, name and about.
 4. Article size limitation is up to 50Mb.
+5. Other improvements: internal links, loading performance...
+
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
 ## :warning: Warning
