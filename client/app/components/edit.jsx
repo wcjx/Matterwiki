@@ -3,12 +3,7 @@ import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import BraftEditor from 'braft-editor';
-const hooks = {
-    'toggle-link': ({ href, target }) => {
-        target='_blank'
-        return { href, target }
-    }
-}
+
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -117,7 +112,7 @@ class EditArticle extends React.Component {
            <br/>
            <div className="row">
             <div className="col-md-12 new-article-form">
-            <BraftEditor value={this.state.editor} onChange={this.handleChange} hooks={hooks} language='en'
+            <BraftEditor value={this.state.editor} onChange={this.handleChange} language='en'
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
                  <br/>

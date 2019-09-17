@@ -38,7 +38,31 @@ class ViewArticle extends React.Component {
       }
       that.setState({loading: false})
     });
+  }
 
+  componentWillReceiveProps(nextProps){
+    var myHeaders = new Headers({
+      "Content-Type": "application/x-www-form-urlencoded",
+      "x-access-token": window.localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'GET',
+             headers: myHeaders,
+             };
+    var that=this;
+    if(nextProps.params.articleId!==this.props.params.articleId){
+      fetch('/api/articles/'+nextProps.params.articleId,myInit)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        if(response.error.error)
+          Alert.error(response.error.message);
+        else {
+          that.setState({article: response.data})
+        }
+        that.setState({loading: false})
+      });
+    }
   }
 
   deleteArticle(e) {
