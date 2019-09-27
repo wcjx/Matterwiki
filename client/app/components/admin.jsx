@@ -207,7 +207,7 @@ class Admin extends React.Component {
             <br/>
             <br/>
             <div className="list-group bordered-scroll-box">
-                  {this.state.users.map(user => (
+                  {this.state.users.sort((a,b)=>{if(a.name>b.name){return 1}else{return -1}}).map(user => (
                     <div key={user.id} href="#" className="list-group-item">
                       {(user.id!=1) ? <span className="pull-right">
                         <Link to={'user/edit/'+user.id} className="btn btn-default">Edit</Link>
