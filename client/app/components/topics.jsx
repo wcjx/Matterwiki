@@ -2,7 +2,6 @@ import React from 'react';
 import {hashHistory, Link} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
-import LogoUpload from './logo_upload.jsx';
 
 class Topics extends React.Component {
 
@@ -128,7 +127,6 @@ class Topics extends React.Component {
               </div>
             </div>
           </div>
-          <LogoUpload />
         </div>);
   }
 }
