@@ -2,6 +2,7 @@ import React from "react";
 import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import Loader from './loader.jsx';
+import handleError from '../handle_error';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Settings extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        handleError(response.error.message,response.code);
       else {
         that.user.name=response.data.name;
         that.user.about=response.data.about;

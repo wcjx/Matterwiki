@@ -5,14 +5,10 @@ import Alert from 'react-s-alert';
 import BraftEditor from 'braft-editor';
 import Markdown from 'braft-extensions/dist/markdown'
 import Table from 'braft-extensions/dist/table'
+import handleError from '../handle_error';
 BraftEditor.use(Markdown())
 BraftEditor.use(Table())
-const hooks = {
-    'toggle-link': ({ href, target }) => {
-        target='_blank'
-        return { href, target }
-    }
-}
+
 class NewArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -40,11 +36,11 @@ class NewArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+      handleError(response.error.message,response.code);
       else {
+        that.setState({loading: false});
         that.setState({topics: response.data})
       }
-      that.setState({loading: false});
     });
   }
 
@@ -100,7 +96,7 @@ class NewArticle extends React.Component {
          <br/>
          <div className="row">
           <div className="col-md-12 new-article-form">
-            <BraftEditor value={this.state.editor} onChange={this.handleChange} hooks={hooks}
+            <BraftEditor value={this.state.editor} onChange={this.handleChange}
             placeholder={'Write here...'} language='en'
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />

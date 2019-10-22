@@ -3,6 +3,7 @@ import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 import BraftEditor from 'braft-editor';
+import handleError from '../handle_error';
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -32,11 +33,10 @@ class ViewArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        handleError(response.error.message,response.code);        
       else {
-        that.setState({article: response.data})
+        that.setState({article: response.data, loading: false})
       }
-      that.setState({loading: false})
     });
   }
 

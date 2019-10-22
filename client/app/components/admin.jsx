@@ -3,6 +3,7 @@ import {hashHistory, Link} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import LogoUpload from './logo_upload.jsx';
+import handleError from '../handle_error';
 
 class Admin extends React.Component {
 
@@ -30,7 +31,7 @@ class Admin extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        handleError(response.error.message,response.code);
       else {
         that.setState({topics: response.data, loading_topics: false})
       }

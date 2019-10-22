@@ -3,6 +3,7 @@ import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import BraftEditor from 'braft-editor';
+import handleError from '../handle_error';
 
 class EditArticle extends React.Component {
   constructor(props) {
@@ -66,11 +67,11 @@ class EditArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+      handleError(response.error.message,response.code);
       else {
+        that.setState({loading: false});
         that.setState({editor: BraftEditor.createEditorState(response.data.body), title: response.data.title, topic_id: response.data.topic_id})
       }
-      that.setState({loading: false});
     });
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
