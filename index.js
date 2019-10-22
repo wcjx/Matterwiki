@@ -56,7 +56,7 @@ apiRoutes.use(function(req, res, next) {
         return res.json({
           error: {
             error: true,
-            message: 'Failed to authenticate token'
+            message: 'Session expired, please login again'
           },
           code: 'B101',
           data: {
@@ -76,7 +76,7 @@ apiRoutes.use(function(req, res, next) {
     return res.status(403).json({
       error: {
         error: true,
-        message: 'No token provided'
+        message: 'Please login'
       },
       code: 'B102',
       data: {
@@ -101,7 +101,7 @@ apiRoutesAdmin.use(function(req, res, next) {
         return res.json({
           error: {
             error: true,
-            message: 'Failed to authenticate token'
+            message: 'Session expired, please login again'
           },
           code: 'B101',
           data: {
@@ -109,22 +109,49 @@ apiRoutesAdmin.use(function(req, res, next) {
           }
         });
       } else {
-        if(true) {
+        if(decoded.id === 1) {
           // if everything is good, save to request for use in other routes
           req.decoded = decoded;
           next();
         }
         else {
-          return res.status(403).json({
-            error: {
-              error: true,
-              message: 'You are not authorized to perform this action'
-            },
-            code: 'BNOTADMIN',
-            data: {
-
+          let flag=false;
+          if(req.path.includes('/users/')){
+            switch (req.method) {
+              case "GET":
+                flag=decoded.id===parseInt(req.path.slice(7));
+                break;
+              case "PUT":
+                flag=decoded.id===parseInt(req.body.id);
+                break;
+              default:
+                break;
             }
-          });
+          }
+          if(req.path.includes('/topics/')){
+            if(req.method==='DELETE'){
+              flag=false;
+            }
+            else{
+              flag=true;
+            }
+          }
+          if(flag){
+            req.decoded = decoded;
+            next();
+          }
+          else{
+            return res.status(403).json({
+              error: {
+                error: true,
+                message: 'You are not authorized to perform this action'
+              },
+              code: 'BNOTADMIN',
+              data: {
+  
+              }
+            });
+          }          
         }
       }
     });
@@ -135,7 +162,7 @@ apiRoutesAdmin.use(function(req, res, next) {
     return res.status(403).json({
       error: {
         error: true,
-        message: 'No token provided'
+        message: 'Please login'
       },
       code: 'B102',
       data: {
