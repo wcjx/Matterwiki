@@ -2,6 +2,7 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import handleError from '../handle_error';
 
 class EditUser extends React.Component {
 
@@ -31,7 +32,7 @@ class EditUser extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        handleError(response.error.message,response.code);
       else {
         that.setState({name: response.data.name, about: response.data.about, email: response.data.email, loading: false})
       }
@@ -39,6 +40,7 @@ class EditUser extends React.Component {
   }
 
   editUser(e) {
+    e.preventDefault();
     var user = {
       name: encodeURIComponent(this.refs.user_name.value),
       about: encodeURIComponent(this.refs.user_about.value),

@@ -10,7 +10,8 @@ class Setup extends React.Component {
     this.handleSignUp = this.handleSignUp.bind(this);
   }
 
-  handleSignUp() {
+  handleSignUp(e) {
+    e.preventDefault();
     var user = {
       name: encodeURIComponent(this.refs.user_name.value),
       about: encodeURIComponent(this.refs.user_about.value),

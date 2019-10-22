@@ -8,7 +8,8 @@ class SearchForm extends React.Component {
     this.searchWiki = this.searchWiki.bind(this);
   }
 
-  searchWiki() {
+  searchWiki(e) {
+    e.preventDefault();
     var results = '/search?query='+this.refs.search.value;
     hashHistory.push(results);
   }

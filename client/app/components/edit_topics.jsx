@@ -2,6 +2,7 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import handleError from '../handle_error';
 
 class EditTopic extends React.Component {
 
@@ -31,7 +32,7 @@ class EditTopic extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        handleError(response.error.message,response.code);
       else {
         that.setState({name: response.data.name, description: response.data.description, loading: false})
       }
@@ -39,6 +40,7 @@ class EditTopic extends React.Component {
   }
 
   editTopic(e) {
+    e.preventDefault();
     var topic = {
       name: encodeURIComponent(this.refs.topic_name.value),
       description: encodeURIComponent(this.refs.topic_description.value),
@@ -61,8 +63,13 @@ class EditTopic extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-          Alert.success('Topic has been edited');
-          hashHistory.push('admin');
+          Alert.success('Topic has been updated');
+          if(localStorage.getItem('userId')===1){
+            hashHistory.push('admin');
+          }
+          else{
+            hashHistory.push('Topics');
+          }
       }
     });
   }
