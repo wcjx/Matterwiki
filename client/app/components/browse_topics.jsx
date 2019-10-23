@@ -26,8 +26,8 @@ class BrowseTopics extends React.Component {
       if(response.error.error)
       handleError(response.error.message,response.code);
       else {
-        that.setState({loading: false});
         that.setState({topics: response.data})
+        that.setState({loading: false});
       }
     });
   }

@@ -28,8 +28,8 @@ class BrowseArticles extends React.Component {
       if(response.error.error)
       handleError(response.error.message,response.code);
       else {
-        that.setState({loading: false});
         that.setState({articles: response.data})
+        that.setState({loading: false});
       }
     });
   }

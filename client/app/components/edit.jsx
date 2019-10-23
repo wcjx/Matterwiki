@@ -77,8 +77,8 @@ class EditArticle extends React.Component {
       if(response.error.error)
       handleError(response.error.message,response.code);
       else {
-        that.setState({loading: false});
         that.setState({editor: BraftEditor.createEditorState(response.data.body), title: response.data.title, topic_id: response.data.topic_id})
+        that.setState({loading: false});
       }
     });
     var myHeaders = new Headers({
