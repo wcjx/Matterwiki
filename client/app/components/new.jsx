@@ -60,13 +60,16 @@ class NewArticle extends React.Component {
                    body: "title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
                    };
         var that = this;
+        that.setState({loading:true});
         fetch('/api/articles/',myInit)
         .then(function(response) {
           return response.json();
         })
         .then(function(response) {
-          if(response.error.error)
+          if(response.error.error){
+            that.setState({loading:false});
             Alert.error(response.error.message);
+          }
           else {
               Alert.success("Article has been successfully saved")
               hashHistory.push('article/'+response.data.id+'?new=true');
