@@ -109,7 +109,7 @@ module.exports =  function(app){
           .save({
             title: req.body.title,
             body: req.body.body,
-            topic_id: req.body.topic_id,
+            topic_id: req.body.topic_id||article.attributes.topic_id,
             what_changed: req.body.what_changed,
             user_id: req.body.user_id
           })
