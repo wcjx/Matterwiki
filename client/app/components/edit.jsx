@@ -8,13 +8,18 @@ import handleError from '../handle_error';
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleBodyChange = this.handleBodyChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {title: "", topic_id: "", topics: [], loading: true, editor:null};
   }
-
-  handleChange(newState) {
-    this.setState({editor: newState, title: this.refs.title.value});
+  
+  handleTitleChange() {
+    this.setState({title: this.refs.title.value});
+  }
+  
+  handleBodyChange(newState) {
+    this.setState({editor: newState});
   }
 
   handleSubmit(e) {
@@ -106,7 +111,7 @@ class EditArticle extends React.Component {
           <div className="row">
             <div className="col-md-12">
               <input
-                onChange={this.handleChange}
+                onChange={this.handleTitleChange}
                 ref="title"
                 className="form-control input-title"
                 value={this.state.title}
@@ -116,7 +121,7 @@ class EditArticle extends React.Component {
            <br/>
            <div className="row">
             <div className="col-md-12 new-article-form">
-            <BraftEditor value={this.state.editor} onChange={this.handleChange} language='en'
+            <BraftEditor value={this.state.editor} onChange={this.handleBodyChange} language='en'
             contentStyle={{minHeight: 210, boxShadow: 'inset 0 1px 3px rgba(0,0,0,.1)'}}
             />
                  <br/>
