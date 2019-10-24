@@ -4,8 +4,8 @@ Differences:
 1. Replace the text editor with [braft-editor](https://github.com/margox/braft-editor).
 2. Give all users permission to create and edit topics.
 3. All users can change their password, name and about.
-4. Article size limitation is up to 50Mb.
-5. Other improvements: internal links, loading performance...
+4. Revert to history articles.
+5. Other improvements: internal links, loading performance, redirect to login...
 
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
