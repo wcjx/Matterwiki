@@ -75,7 +75,7 @@ class App extends React.Component {
           {that.props.children}
           </div>
         <div className="footer center-align">
-          <p className="help-block">Powered by <a href="http://matterwiki.com">Matterwiki</a></p>
+          <p className="help-block">Powered by <a href="https://github.com/wcjx/Matterwiki">Matterwiki</a></p>
         </div>
            <Alert stack={{limit: 3}} position='bottom'/>
     </div>
